@@ -38,9 +38,13 @@ kotlin {
                 implementation(Deps.ktorSerializationJson)
                 implementation(Deps.ktorAuth)
                 implementation(Deps.ktorLogging)
+
+
+
                 implementation(Deps.sqlDelightRuntime)
                 implementation(Deps.sqlDelightCoroutinesExtensions)
                 implementation(Deps.kotlinDateTime)
+
 
             }
         }
@@ -58,7 +62,7 @@ kotlin {
                 implementation(Deps.sqlDelightAndroidDriver)
             }
         }
-        val androidUnitTest by getting
+
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -92,6 +96,10 @@ android {
         minSdk = 24
         buildConfigField("String", "OPEN_AI_KEY", "\"${System.getenv("OPENAI_API_KEY")}\"")
     }
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
+
 }
 
 

@@ -25,6 +25,7 @@ android {
     packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/INDEX.LIST"
         }
     }
     buildTypes {
@@ -61,6 +62,7 @@ dependencies {
     implementation(Deps.hiltNavigationCompose)
 
     implementation(Deps.ktorAndroid)
+    implementation((Deps.ktorLogginFramework))
 
     androidTestImplementation(Deps.testRunner)
     androidTestImplementation(Deps.jUnit)
