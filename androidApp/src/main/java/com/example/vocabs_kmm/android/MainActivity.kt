@@ -18,8 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.example.vocabs_kmm.vocab_to_phrase.data.remote.OpenAiHttpClientFactory
-import com.example.vocabs_kmm.vocab_to_phrase.data.vocab_to_phrase.KtorVocabToPhraseClient
+import com.example.vocabs_kmm.vocab_to_flashcard.data.remote.OpenAiHttpClientFactory
+import com.example.vocabs_kmm.vocab_to_flashcard.data.vocab_to_phrase.KtorVocabToPhraseClient
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,11 +36,7 @@ class MainActivity : ComponentActivity() {
                         mutableStateOf("")
                     }
                     LaunchedEffect(key1 = null) {
-                        phrase = vocabToPhraseClient.generatePhrase(
-                            fromWord = "skaffa",
-                            fromLanguage = "Swedish",
-                            toLanguage = "Swedish"
-                        )
+
                     }
 
                     Column(
