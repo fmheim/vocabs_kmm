@@ -15,18 +15,14 @@ import com.example.vocabs_kmm.android.vocab_to_flashcard.presentation.VocabToFla
 fun VocabsAppNavigation(
     navController: NavHostController = rememberNavController(),
     startDestination: String = Routes.VocabToFlashcardScreen,
-){
+) {
+    NavHost(navController = navController, startDestination = startDestination) {
 
-    NavHost(navController = navController, startDestination = startDestination){
-
-        composable(route = Routes.VocabToFlashcardScreen){
+        composable(route = Routes.VocabToFlashcardScreen) {
             val viewModel: AndroidVocabToFlashCardViewModel = hiltViewModel()
             val state by viewModel.state.collectAsState()
-            VocabToFlashcardScreen()
-
+            VocabToFlashcardScreen(state = state, onEvent = viewModel::onEvent)
         }
 
-
     }
-
 }

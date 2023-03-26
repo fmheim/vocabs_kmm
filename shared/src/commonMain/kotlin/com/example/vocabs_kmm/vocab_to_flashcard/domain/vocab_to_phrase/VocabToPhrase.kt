@@ -4,18 +4,29 @@ import com.example.vocabs_kmm.core.domain.util.Resource
 
 class VocabToPhrase(private val client: VocabToPhraseClient) {
     suspend fun execute(
-        fromLanguage: String,
-        toLanguage: String,
-        vocab: String
-    ): Resource<String> {
+        languageName: String, vocab: String?
+    ): Resource<ExamplePhrase> {
         return try {
-            val response = client.requestToGeneratePhrase(fromLanguage, toLanguage, vocab)
-            val phrase = response.choices?.firstOrNull()?.message?.content
-            if(phrase.isNullOrBlank()) throw VocabToPhraseException(VocabToPhraseError.SERVER_ERROR)
-            Resource.Success(phrase)
+            if (vocab.isNullOrBlank()) throw VocabToPhraseException(VocabToPhraseError.CLIENT_ERROR)
+            val response = client.requestToGeneratePhrase(languageName, vocab)
+
+
+            val responsePhrase = response.choices?.firstOrNull()?.message?.content
+            if (responsePhrase.isNullOrBlank()) throw VocabToPhraseException(VocabToPhraseError.SERVER_ERROR)
+            Resource.Success(separateSentence(responsePhrase))
         } catch (e: VocabToPhraseException) {
             e.printStackTrace()
             Resource.Error(e)
         }
     }
+}
+
+private fun separateSentence(sentence: String): ExamplePhrase {
+    val parts = sentence.split("#")
+    if(parts.size <= 1) return ExamplePhrase(beforeVocab = sentence, vocab = "", afterVocab = "")
+    val before = parts[0]
+    val after = parts[1]
+    val vocab = after.split(" ").getOrNull(0)
+    val afterVocab = after.subSequence(range = (vocab?.length ?: 0)..after.lastIndex)
+    return ExamplePhrase(beforeVocab = before, vocab = vocab ?: "", afterVocab = afterVocab.toString())
 }

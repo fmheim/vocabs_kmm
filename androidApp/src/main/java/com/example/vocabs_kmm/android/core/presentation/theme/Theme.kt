@@ -29,7 +29,8 @@ fun VocabsTheme(
         h2 = TextStyle(
             fontFamily = FontFamily.SansSerif,
             fontWeight = FontWeight.Bold,
-            fontSize = 24.sp
+            fontSize = 24.sp,
+            textAlign = TextAlign.Center
         ),
         h3 = TextStyle(
             fontFamily = FontFamily.SansSerif,

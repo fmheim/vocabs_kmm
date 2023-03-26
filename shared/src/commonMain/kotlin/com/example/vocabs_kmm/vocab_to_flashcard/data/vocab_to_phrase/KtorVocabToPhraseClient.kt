@@ -21,7 +21,7 @@ import io.ktor.utils.io.errors.IOException
 
 class KtorVocabToPhraseClient(private val openAiHttpClient: HttpClient) : VocabToPhraseClient {
     override suspend fun requestToGeneratePhrase(
-        fromLanguage: String, toLanguage: String, vocab: String
+        language: String, vocab: String
     ): ChatCompletionResponse {
         val response = try {
             openAiHttpClient.post {
@@ -33,8 +33,7 @@ class KtorVocabToPhraseClient(private val openAiHttpClient: HttpClient) : VocabT
                             ChatMessage(
                                 role = "user",
                                 content = VocabToPhrasePromptProvider(
-                                    fromLanguage = fromLanguage,
-                                    toLanguage = toLanguage,
+                                    language = language,
                                     vocab = vocab
                                 ).prompt
                             )

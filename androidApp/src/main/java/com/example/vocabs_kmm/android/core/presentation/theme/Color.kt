@@ -17,7 +17,7 @@ val lightColors = lightColors(
     onPrimary = DarkPurple,
     onBackground = DarkPurple,
     surface = LightPurple,
-    onSurface = LightGrey
+    onSurface = LightGrey,
 )
 
 val darkColors = darkColors(

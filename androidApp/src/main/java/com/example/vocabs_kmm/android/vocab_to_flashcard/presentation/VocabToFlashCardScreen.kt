@@ -1,43 +1,27 @@
 package com.example.vocabs_kmm.android.vocab_to_flashcard.presentation
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Autorenew
-import androidx.compose.material.icons.filled.Save
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.dp
 import com.example.vocabs_kmm.android.core.presentation.theme.VocabsTheme
+import com.example.vocabs_kmm.android.vocab_to_flashcard.presentation.components.ExamplePhraseComponent
+import com.example.vocabs_kmm.android.vocab_to_flashcard.presentation.components.VocabInputFieldBox
+import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.ExamplePhrase
+import com.example.vocabs_kmm.vocab_to_flashcard.presentation.VocabToFlashcardEvent
+import com.example.vocabs_kmm.vocab_to_flashcard.presentation.VocabToFlashcardState
 
 @Composable
-fun VocabToFlashcardScreen() {
+fun VocabToFlashcardScreen(state: VocabToFlashcardState, onEvent: (VocabToFlashcardEvent) -> Unit) {
     Scaffold(backgroundColor = MaterialTheme.colors.background) { paddingValues ->
         Column(
             modifier = Modifier
@@ -50,99 +34,33 @@ fun VocabToFlashcardScreen() {
                 modifier = Modifier.fillMaxHeight(0.25f),
                 contentScale = ContentScale.FillWidth
             )
-            Box(modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.389f)) {
-                Surface(
-                    shape = RectangleWithCurvedBottomEdgeShape(),
-                    color = MaterialTheme.colors.surface,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.85f)
+            ExamplePhraseComponent(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.41f),
+                onEvent = onEvent,
+                state = state
+            )
 
-                ) {
-                    Column(
-                        Modifier
-                            .fillMaxSize()
-                            .padding(top = 24.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
-                        verticalArrangement = Arrangement.Top,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "Example sentence of an interesting topic, quite long but not too long.",
-                            style = MaterialTheme.typography.body2,
-                            color = MaterialTheme.colors.onSurface
-                        )
-                    }
-
-
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.BottomCenter),
-                    horizontalArrangement = Arrangement.SpaceAround
-                ) {
-                    IconButton(
-                        onClick = { /*TODO*/ },
-                        modifier = Modifier
-                            .background(color = MaterialTheme.colors.primary, shape = CircleShape)
-                            .padding(7.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Autorenew,
-                            contentDescription = "re-generate",
-                            modifier = Modifier.size(45.dp)
-                        )
-                    }
-                    IconButton(
-                        onClick = { /*TODO*/ },
-                        modifier = Modifier
-                            .background(color = MaterialTheme.colors.primary, shape = CircleShape)
-                            .padding(7.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Save,
-                            contentDescription = "save",
-                            modifier = Modifier.size(45.dp)
-                        )
-                    }
-                }
-
-            }
-
-
+            VocabInputFieldBox(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.8f),
+                onEvent = onEvent,
+                state = state
+            )
         }
     }
-
-
 }
 
 @Preview(showBackground = true)
 @Composable
 fun VocabToFlashcardScreenPreview() {
     VocabsTheme(darkTheme = true) {
-        VocabToFlashcardScreen()
+        VocabToFlashcardScreen(
+            state = VocabToFlashcardState(phrase = ExamplePhrase(beforeVocab = "This is an ", vocab = "example", afterVocab = " that explains a word and was generated by ai.")),
+            onEvent = {})
     }
 }
 
 
-class RectangleWithCurvedBottomEdgeShape() : Shape {
-    override fun createOutline(
-        size: Size, layoutDirection: LayoutDirection, density: Density
-    ): Outline {
-        return Outline.Generic(
-            path = drawPath(size)
-        )
-    }
-}
-
-fun drawPath(size: Size): Path {
-    return Path().apply {
-        reset()
-        lineTo(size.width, 0f)
-        lineTo(size.width, size.height)
-        quadraticBezierTo(x1 = size.width / 2f, y1 = size.height * 1.15f, x2 = 0f, y2 = size.height)
-        close()
-    }
-}

@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class VocabToFlashcardViewModel(
-    private val coroutineScope: CoroutineScope?, private val vocabToPhrase: VocabToPhrase
+    coroutineScope: CoroutineScope?, private val vocabToPhrase: VocabToPhrase
 ) {
 
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
@@ -24,24 +24,37 @@ class VocabToFlashcardViewModel(
 
     fun onEvent(event: VocabToFlashcardEvent) {
         when (event) {
-            is VocabToFlashcardEvent.GenerateImage  -> TODO()
-            is VocabToFlashcardEvent.GeneratePhrase -> generatePhrase(
-                fromLanguage = event.fromLanguage,
-                toLanguage = event.toLanguage,
-                vocab = event.vocab
-            )
+            is VocabToFlashcardEvent.GenerateImage      -> TODO()
+            is VocabToFlashcardEvent.GeneratePhrase     -> generatePhrase(currentState = state.value)
+            is VocabToFlashcardEvent.Error              -> TODO()
+            is VocabToFlashcardEvent.SaveFlashcard      -> TODO()
+            is VocabToFlashcardEvent.VocabInputChanged  -> _state.update { it.copy(vocab = event.text) }
+            is VocabToFlashcardEvent.SelectLanguage     -> _state.update { it.copy(language = event.language, phrase = null) }
+            VocabToFlashcardEvent.OpenLanguageDropDown  -> _state.update {
+                it.copy(
+                    isChoosingLanguage = true
+                )
+            }
 
+            VocabToFlashcardEvent.CloseLanguageDropDown -> _state.update {
+                it.copy(
+                    isChoosingLanguage = false
+                )
+            }
         }
     }
 
-    fun generatePhrase(fromLanguage: String, toLanguage: String, vocab: String) {
+    private fun generatePhrase(currentState: VocabToFlashcardState) {
         if (phraseGenerateJob?.isActive == true) return
         phraseGenerateJob = viewModelScope.launch {
             _state.update { it.copy(isGenerating = true) }
-            when (val result = vocabToPhrase.execute(fromLanguage, toLanguage, vocab)) {
+            when (val result = vocabToPhrase.execute(
+                languageName = currentState.language.language.langName, vocab = currentState.vocab
+            )) {
                 is Resource.Success -> {
                     _state.update { it.copy(phrase = result.data, isGenerating = false) }
                 }
+
                 is Resource.Error   -> {
                     _state.update {
                         it.copy(
@@ -53,8 +66,5 @@ class VocabToFlashcardViewModel(
                 }
             }
         }
-
     }
-
-
 }

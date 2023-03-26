@@ -5,8 +5,7 @@ import com.example.vocabs_kmm.vocab_to_flashcard.data.vocab_to_phrase.dto.ChatCo
 
 interface VocabToPhraseClient {
     suspend fun requestToGeneratePhrase(
-        fromLanguage: String,
-        toLanguage: String,
-        fromWord: String
+        language: String,
+        vocab: String
     ): ChatCompletionResponse
 }
