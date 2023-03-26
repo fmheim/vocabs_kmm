@@ -38,7 +38,7 @@ fun VocabInputFieldBox(
             singleLine = true,
             shape = CircleShape,
             placeholder = {Text(text = "type a word...", textAlign = TextAlign.Center)},
-            value = state.vocab ?: "",
+            value = state.vocabInput ?: "",
             textStyle = MaterialTheme.typography.h2,
             onValueChange = { newValue -> onEvent(VocabToFlashcardEvent.VocabInputChanged(text = newValue)) },
             keyboardOptions = KeyboardOptions(

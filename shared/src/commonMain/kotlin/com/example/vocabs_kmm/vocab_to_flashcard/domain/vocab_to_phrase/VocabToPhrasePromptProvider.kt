@@ -6,3 +6,8 @@ class VocabToPhrasePromptProvider(
 ) {
     val prompt =
         "Write a concise example sentence in $language that makes the meaning of the following $language word clear: $vocab. Only use $language. In the example sentence, prefix the word on which the example sentence is based with a #."}
+
+/*
+Write a concise example sentence in English that makes the meaning of the following English word clear: school. Only use English. In the example sentence, prefix the word on which the example sentence is based with a #.
+Then come up with a description of an image that relates to the example sentence. In your answer, add the description directly after the example sentence. Use a % as a separation of example sentence and visual description. Only write the description without any further information. Do not write something like "create an image" but just describe the image.  Feel free to add fitting styles like "digital art", "realistic" or any other art style to the description.
+ */

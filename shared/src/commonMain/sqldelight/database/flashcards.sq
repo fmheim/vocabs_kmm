@@ -1,0 +1,55 @@
+-- Define the table for flashcard entities
+CREATE TABLE flashcardEntity (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    languageCode TEXT NOT NULL,
+    vocab TEXT NOT NULL ,
+    beforeVocabText TEXT NOT NULL,
+    vocabInPhrase TEXT NOT NULL,
+    afterVocabText TEXT NOT NULL,
+    timestamp INTEGER NOT NULL
+);
+
+-- Create an index on the languageCode column for faster querying
+CREATE INDEX flashcards_language_code_index ON flashcardEntity (languageCode);
+
+-- Insert a flashcard --
+insertFlashcard:
+INSERT OR REPLACE
+INTO flashcardEntity (
+    id,
+    languageCode,
+    vocab,
+    beforeVocabText,
+    vocabInPhrase,
+    afterVocabText,
+    timestamp
+) VALUES (
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?
+);
+
+-- Get all flashcards
+getAllFlashcards:
+SELECT *
+FROM flashcardEntity
+ORDER BY timestamp DESC;
+
+-- Get all flashcards with a certain languageCode
+getAllFlashcardsInCertainLanguage:
+SELECT *
+FROM flashcardEntity
+WHERE languageCode = ?
+ORDER BY vocab ASC;
+
+-- Get a random flashcard from a certain language
+getRandomFlashcardInCertainLanguage:
+SELECT *
+FROM flashcardEntity
+WHERE languageCode = ?
+ORDER BY RANDOM()
+LIMIT 1;

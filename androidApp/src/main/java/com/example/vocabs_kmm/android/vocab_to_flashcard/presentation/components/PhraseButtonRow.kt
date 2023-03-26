@@ -86,7 +86,7 @@ fun BoxScope.PhraseButtonsRow(
 @Composable
 private fun SaveIconButton(onEvent: (VocabToFlashcardEvent) -> Unit, state: VocabToFlashcardState) {
     IconButton(
-        onClick = { onEvent(VocabToFlashcardEvent.SaveFlashcard("todo")) },
+        onClick = { onEvent(VocabToFlashcardEvent.SaveFlashcard) },
         modifier = Modifier
             .background(
                 color = if (state.phrase == null) MaterialTheme.colors.primary.copy(alpha = 0.5f) else MaterialTheme.colors.primary,

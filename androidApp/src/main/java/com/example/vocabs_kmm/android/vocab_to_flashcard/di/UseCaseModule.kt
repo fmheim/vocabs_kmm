@@ -1,5 +1,7 @@
 package com.example.vocabs_kmm.android.vocab_to_flashcard.di
 
+import com.example.vocabs_kmm.core.domain.flashcard.FlashcardDataSource
+import com.example.vocabs_kmm.vocab_to_flashcard.domain.flashcard.SaveAsFlashcard
 import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhrase
 import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhraseClient
 import dagger.Module
@@ -13,9 +15,17 @@ import dagger.hilt.android.scopes.ViewModelScoped
 object UseCaseModule {
     @Provides
     @ViewModelScoped
-    fun vocabToPhraseUseCase(
+    fun provideVocabToPhraseUseCase(
         client: VocabToPhraseClient
     ): VocabToPhrase {
-        return VocabToPhrase(client)
+        return VocabToPhrase(client = client)
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun providerSaveAsFlashcardUseCase(
+        dataSource: FlashcardDataSource
+    ):SaveAsFlashcard{
+        return SaveAsFlashcard(flashcardDataSource = dataSource)
     }
 }

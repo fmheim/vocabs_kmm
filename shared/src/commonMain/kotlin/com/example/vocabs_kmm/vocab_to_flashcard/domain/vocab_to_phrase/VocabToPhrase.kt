@@ -9,8 +9,6 @@ class VocabToPhrase(private val client: VocabToPhraseClient) {
         return try {
             if (vocab.isNullOrBlank()) throw VocabToPhraseException(VocabToPhraseError.CLIENT_ERROR)
             val response = client.requestToGeneratePhrase(languageName, vocab)
-
-
             val responsePhrase = response.choices?.firstOrNull()?.message?.content
             if (responsePhrase.isNullOrBlank()) throw VocabToPhraseException(VocabToPhraseError.SERVER_ERROR)
             Resource.Success(separateSentence(responsePhrase))

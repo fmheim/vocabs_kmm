@@ -99,7 +99,14 @@ android {
     packagingOptions {
         resources.excludes.add("META-INF/*")
     }
+}
 
+
+sqldelight{
+    database("FlashcardDatabase"){
+        packageName = "com.example.vocabs_kmm.database"
+        sourceFolders = listOf("sqldelight")
+    }
 }
 
 

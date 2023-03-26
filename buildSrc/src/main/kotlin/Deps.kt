@@ -46,7 +46,7 @@ object Deps {
     private const val gradleVersion = "7.4.2"
     const val androidBuildTools = "com.android.tools.build:gradle:$gradleVersion"
 
-    private const val sqlDelightGradleVersion = "1.5.3"
+    private const val sqlDelightGradleVersion = "1.5.5"
     const val sqlDelightGradlePlugin = "com.squareup.sqldelight:gradle-plugin:$sqlDelightGradleVersion"
 
     const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
