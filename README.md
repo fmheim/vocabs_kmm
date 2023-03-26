@@ -17,7 +17,9 @@ I implemented the following features in the `vocabs_kmm` app:
 
 ### Screen recording of current status
 
-![](https://github.com/fmheim/vocabs_kmm/blob/master/2023-03-26_screen_recording.gif)
+
+https://user-images.githubusercontent.com/100945009/227809998-2e98ca93-b1f5-4713-8a68-c05c29a99563.mp4
+
 
 
 ## Future Features
