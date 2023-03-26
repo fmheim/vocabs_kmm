@@ -1,8 +1,7 @@
 # vocabs_kmm
 
 I'm developing `vocabs_kmm` as a Kotlin Multiplatform Mobile (KMM) project that allows users to input a word in a selected language and generates an example sentence using the OpenAI API to explain the word in a common context. The app also features a study flashcards mode where the user sees the example sentence with the missing word and can test their vocabulary retention.
-The structure of the app, especially the shared view model and common flow is oriented on the techniques teached in the KMM course by @philipp lackner: https://pl-coding.com/building-industry-level-multiplatform-apps-with-kmm/
-
+I integrated several techniques learned from this [KMM course by @philipplackner](https://pl-coding.com/building-industry-level-multiplatform-apps-with-kmm/) into my app. This includes for example sharing the view model, which is very useful.
 
 
 ## Features
