@@ -10,7 +10,7 @@ actual class UiLanguage(
     actual companion object {
         actual fun byCode(langCode: String): UiLanguage {
             return allLanguages.find { it.language.langCode == langCode }
-                ?: throw IllegalArgumentException("Invalid or unsupported language code")
+                ?: throw IllegalArgumentException("Invalid or unsupported selectedLanguage code")
         }
 
         actual val allLanguages: List<UiLanguage>

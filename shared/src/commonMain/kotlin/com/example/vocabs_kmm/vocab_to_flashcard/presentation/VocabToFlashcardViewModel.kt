@@ -8,6 +8,7 @@ import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToP
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -35,7 +36,7 @@ class VocabToFlashcardViewModel(
             is VocabToFlashcardEvent.VocabInputChanged  -> _state.update { it.copy(vocabInput = event.text) }
             is VocabToFlashcardEvent.SelectLanguage     -> _state.update {
                 it.copy(
-                    language = event.language, phrase = null
+                    selectedLanguage = event.language, phrase = null
                 )
             }
             VocabToFlashcardEvent.OpenLanguageDropDown  -> _state.update {
@@ -49,6 +50,8 @@ class VocabToFlashcardViewModel(
                     isChoosingLanguage = false
                 )
             }
+
+            VocabToFlashcardEvent.ToStudyScreen         -> Unit //handled in navigation
         }
     }
 
@@ -56,14 +59,15 @@ class VocabToFlashcardViewModel(
         viewModelScope.launch {
             val result = saveAsFlashcard.execute(
                 examplePhrase = currentState.phrase,
-                languageCode = currentState.language.language.langCode,
+                languageCode = currentState.selectedLanguage.language.langCode,
                 vocab = currentState.vocabInput
             )
             when(result){
                 is Resource.Error   -> _state.update { it.copy(error = result.throwable as? FlashcardException) }
-                is Resource.Success -> _state.update { it.copy(lastSavedFlashCard = result.data) }
+                is Resource.Success -> _state.update { it.copy(lastSavedFlashCard = result.data, showSavedFlashcard = true) }
             }
-            _state.update { it.copy(lastSavedFlashCard = result.data) }
+            delay(1200)
+            _state.update { it.copy(showSavedFlashcard = false) }
         }
     }
 
@@ -72,7 +76,7 @@ class VocabToFlashcardViewModel(
         phraseGenerateJob = viewModelScope.launch {
             _state.update { it.copy(isGenerating = true, submittedVocab = it.vocabInput) }
             when (val result = vocabToPhrase.execute(
-                languageName = currentState.language.language.langName, vocab = currentState.vocabInput
+                languageName = currentState.selectedLanguage.language.langName, vocab = currentState.vocabInput
             )) {
                 is Resource.Success -> {
                     _state.update { it.copy(phrase = result.data, isGenerating = false) }

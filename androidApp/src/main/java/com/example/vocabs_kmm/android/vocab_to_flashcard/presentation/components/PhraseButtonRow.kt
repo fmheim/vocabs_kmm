@@ -1,8 +1,11 @@
 package com.example.vocabs_kmm.android.vocab_to_flashcard.presentation.components
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -22,6 +25,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Autorenew
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,6 +37,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.vocabs_kmm.android.R
+import com.example.vocabs_kmm.android.core.presentation.theme.DarkPurple
+import com.example.vocabs_kmm.android.core.presentation.theme.LightGreen
 import com.example.vocabs_kmm.android.core.presentation.theme.VocabsTheme
 import com.example.vocabs_kmm.core.presentation.UiLanguage
 import com.example.vocabs_kmm.vocab_to_flashcard.presentation.VocabToFlashcardEvent
@@ -83,24 +89,43 @@ fun BoxScope.PhraseButtonsRow(
     }
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun SaveIconButton(onEvent: (VocabToFlashcardEvent) -> Unit, state: VocabToFlashcardState) {
     IconButton(
         onClick = { onEvent(VocabToFlashcardEvent.SaveFlashcard) },
         modifier = Modifier
             .background(
-                color = if (state.phrase == null) MaterialTheme.colors.primary.copy(alpha = 0.5f) else MaterialTheme.colors.primary,
+                color = if (state.phrase == null) MaterialTheme.colors.primary.copy(alpha = 0.5f) else if (state.showSavedFlashcard) DarkPurple else MaterialTheme.colors.primary,
                 shape = CircleShape
+            )
+            .border(
+                shape = CircleShape,
+                width = 1.dp,
+                color = if(state.showSavedFlashcard) LightGreen else if (isSystemInDarkTheme()) Color.Transparent else MaterialTheme.colors.surface
             )
             .padding(7.dp),
         enabled = state.phrase != null
     ) {
-        Icon(
-            imageVector = Icons.Default.Save,
-            contentDescription = stringResource(R.string.save),
-            modifier = Modifier.size(45.dp),
-            tint = if (state.phrase == null) MaterialTheme.colors.onPrimary.copy(alpha = 0.5f) else MaterialTheme.colors.onPrimary
-        )
+        AnimatedContent(
+            targetState = state.showSavedFlashcard,
+            label = "saved animation"
+        ) { showSaved ->
+            if (showSaved) {
+                Icon(
+                    imageVector = Icons.Default.Check,
+                    contentDescription = stringResource(R.string.saved_success),
+                    modifier = Modifier.size(45.dp),
+                    tint = LightGreen
+                )
+            } else
+                Icon(
+                    imageVector = Icons.Default.Save,
+                    contentDescription = stringResource(R.string.save),
+                    modifier = Modifier.size(45.dp),
+                    tint = if (state.phrase == null) MaterialTheme.colors.onPrimary.copy(alpha = 0.5f) else MaterialTheme.colors.onPrimary
+                )
+        }
     }
 }
 
@@ -123,8 +148,8 @@ private fun RowScope.LanguageIconButton(
 
     ) {
         Image(
-            painter = painterResource(id = state.language.drawableRes),
-            contentDescription = "language",
+            painter = painterResource(id = state.selectedLanguage.drawableRes),
+            contentDescription = "selectedLanguage",
             modifier = Modifier.size(60.dp),
         )
     }
@@ -137,6 +162,11 @@ private fun ReDoIconButton(onEvent: (VocabToFlashcardEvent) -> Unit, state: Voca
             .background(
                 color = if (state.phrase == null) MaterialTheme.colors.primary.copy(alpha = 0.5f) else MaterialTheme.colors.primary,
                 shape = CircleShape
+            )
+            .border(
+                shape = CircleShape,
+                width = 1.dp,
+                color = if (isSystemInDarkTheme()) Color.Transparent else MaterialTheme.colors.surface
             )
             .padding(7.dp),
         enabled = state.phrase != null
@@ -153,7 +183,7 @@ private fun ReDoIconButton(onEvent: (VocabToFlashcardEvent) -> Unit, state: Voca
 @Preview
 @Composable
 fun PhraseButtonsRowPreview() {
-    VocabsTheme {
+    VocabsTheme(darkTheme = false) {
         Box() {
             PhraseButtonsRow(onEvent = {}, state = VocabToFlashcardState(isChoosingLanguage = true))
         }

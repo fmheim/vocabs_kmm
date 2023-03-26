@@ -2,4 +2,7 @@
 <resources>
     <string name="re_generate">re-generate</string>
     <string name="save">save</string>
+    <string name="study">study</string>
+    <string name="show_answer">show answer</string>
+    <string name="saved_success">saved successfully</string>
 </resources>

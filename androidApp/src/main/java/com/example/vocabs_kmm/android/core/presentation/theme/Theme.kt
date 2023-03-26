@@ -49,6 +49,12 @@ fun VocabsTheme(
             textAlign = TextAlign.Center,
             color = MaterialTheme.colors.onSurface
         ),
+        button = TextStyle(
+            fontFamily = FontFamily.SansSerif,
+            fontWeight = FontWeight.Bold,
+            fontSize = 18.sp,
+            textAlign = TextAlign.Center,
+        )
     )
     val shapes = Shapes(
         small = RoundedCornerShape(4.dp),

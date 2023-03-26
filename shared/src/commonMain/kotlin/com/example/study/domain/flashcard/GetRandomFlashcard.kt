@@ -4,7 +4,7 @@ import com.example.vocabs_kmm.core.domain.flashcard.Flashcard
 import com.example.vocabs_kmm.core.domain.flashcard.FlashcardDataSource
 import com.example.vocabs_kmm.core.domain.util.CommonFlow
 import com.example.vocabs_kmm.core.domain.util.Resource
-import io.ktor.utils.io.errors.IOException
+
 
 class GetRandomFlashcard(private val flashcardDataSource: FlashcardDataSource) {
 
@@ -12,10 +12,12 @@ class GetRandomFlashcard(private val flashcardDataSource: FlashcardDataSource) {
 
         return try {
             Resource.Success(flashcardDataSource.getRandomFlashcardInCertainLanguage(languageCode = languageCode))
-        }catch (e: IOException){
+        }catch (e: Exception){
             e.printStackTrace()
             Resource.Error(e)
         }
     }
+
+    //todo error handling
 
 }

@@ -5,7 +5,7 @@ class VocabToPhrasePromptProvider(
     vocab: String
 ) {
     val prompt =
-        "Write a concise example sentence in $language that makes the meaning of the following $language word clear: $vocab. Only use $language. In the example sentence, prefix the word on which the example sentence is based with a #."}
+        "Write a concise example sentence in $language that makes the meaning of the following $language word clear: $vocab. Only use $language. In the example sentence, prefix the word on which the example sentence is based with a #. The word can of course change its form so it makes sense in the sentence and the sentence is grammatically correct. The position of the word doesn't matter as long as you prefix it with a #."}
 
 /*
 Write a concise example sentence in English that makes the meaning of the following English word clear: school. Only use English. In the example sentence, prefix the word on which the example sentence is based with a #.

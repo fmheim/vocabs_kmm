@@ -12,6 +12,8 @@ sealed class VocabToFlashcardEvent() {
     data class SelectLanguage(val language: UiLanguage) : VocabToFlashcardEvent()
     object OpenLanguageDropDown : VocabToFlashcardEvent()
     object CloseLanguageDropDown : VocabToFlashcardEvent()
+
+    object ToStudyScreen : VocabToFlashcardEvent()
     data class Error(val error: VocabToPhraseError) : VocabToFlashcardEvent()
 
 }
