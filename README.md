@@ -10,7 +10,7 @@ I implemented the following features in the `vocabs_kmm` app:
 
 - **OpenAI API using Ktor:** I used the Ktor HTTP client to access the OpenAI API and generate example sentences.
 - **MVI Architecture:** I followed the Model-View-Intent (MVI) architecture to separate concerns and make the codebase more manageable.
-- **Database with SQLite:** I used SQLite to store data and provide offline access to the generated example sentences.
+- **Database with SQLDelight:** I used SQLDelight in the shared module to store data and provide offline access to the generated example sentences.
 - **Study Flashcards:** I added a study flashcards mode where the user can test their vocabulary retention by seeing the example sentence with the missing word.
 - **Jet Compose UI for Android:** I utilized Jet Compose, a modern toolkit for building native Android UI, to develop the user interface for the Android version of the app. The app has a dark mode and a light mode theme.
 
