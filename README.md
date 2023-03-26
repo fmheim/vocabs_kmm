@@ -25,7 +25,7 @@ https://user-images.githubusercontent.com/100945009/227809998-2e98ca93-b1f5-4713
 
 I plan to implement the following features in future updates of the `vocabs_kmm` app:
 
-- **Image Generation:** The app will use the OpenAi Api to generate images that complement the example sentences to enhance the user's learning experience. And the moment only a static place holder image is shown.
+- **Image Generation:** The app will use the OpenAi Api to generate images that complement the example sentences to enhance the user's learning experience. At the moment only a static place holder image is shown.
 - **iOS App** I plan to use SwiftUi to make the UI for the iOS app of the KMM project. As the viewmodel and all the business logic is implemented as a shared kotlin module, this will require only minimal swift code.
 
 
