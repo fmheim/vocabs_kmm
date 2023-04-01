@@ -15,6 +15,10 @@ object Deps {
     private const val composeNavigationVersion = "2.5.3"
     const val composeNavigation = "androidx.navigation:navigation-compose:$composeNavigationVersion"
 
+    //Coil
+    private const val coilVersion = "2.3.0"
+    const val coilCompose = "io.coil-kt:coil-compose:$coilVersion"
+
     // KOTLIN DATE TIME
     private const val dateTimeVersion = "0.4.0"
     const val kotlinDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion"
