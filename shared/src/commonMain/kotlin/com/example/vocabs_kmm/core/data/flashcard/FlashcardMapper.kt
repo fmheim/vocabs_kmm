@@ -1,9 +1,9 @@
 package com.example.vocabs_kmm.core.data.flashcard
 
 import com.example.vocabs_kmm.core.domain.flashcard.Flashcard
-import database.FlashcardEntity
+import database.Flashcards
 
-fun FlashcardEntity.toFlashCard(): Flashcard {
+fun Flashcards.toFlashCard(): Flashcard {
     return Flashcard(
         id = id,
         languageCode = languageCode,

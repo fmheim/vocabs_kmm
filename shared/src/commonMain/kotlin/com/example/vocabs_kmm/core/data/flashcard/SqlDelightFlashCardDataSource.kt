@@ -14,10 +14,7 @@ class SqlDelightFlashCardDataSource(db: FlashcardDatabase) : FlashcardDataSource
 
     private val queries = db.flashcardsQueries
     override fun getAllFlashcards(): CommonFlow<List<Flashcard>> {
-        return queries.getAllFlashcards()
-            .asFlow()
-            .mapToList()
-            .map { flashcards ->
+        return queries.getAllFlashcards().asFlow().mapToList().map { flashcards ->
                 flashcards.map { entity ->
                     entity.toFlashCard()
                 }
@@ -26,19 +23,17 @@ class SqlDelightFlashCardDataSource(db: FlashcardDatabase) : FlashcardDataSource
 
     override fun getAllFlashcardsInCertainLanguage(languageCode: String): CommonFlow<List<Flashcard>> {
         return queries.getAllFlashcardsInCertainLanguage(languageCode = languageCode).asFlow()
-            .mapToList().map {flashcards ->
+            .mapToList().map { flashcards ->
                 flashcards.map { entity ->
                     entity.toFlashCard()
                 }
-        }.toCommonFlow()
+            }.toCommonFlow()
     }
 
-    override fun getRandomFlashcardInCertainLanguage(languageCode: String): CommonFlow<Flashcard> {
-        return queries.getRandomFlashcardInCertainLanguage(languageCode).asFlow().mapToList().map{flashcards ->
-            flashcards.map { entity ->
-                entity.toFlashCard()
-            }.first()
-        }.toCommonFlow()
+    override suspend fun getRandomFlashcardInCertainLanguage(languageCode: String): Flashcard? {
+        return queries.getRandomFlashcardInCertainLanguage(languageCode)
+            .executeAsOneOrNull()
+            ?.toFlashCard()
     }
 
     override suspend fun insertFlashcard(flashcard: Flashcard) {
