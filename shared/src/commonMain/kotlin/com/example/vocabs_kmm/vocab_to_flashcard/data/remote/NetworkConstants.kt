@@ -9,5 +9,6 @@ object NetworkConstants {
 
     val MODEL_GPT_3_5_TURBO = "gpt-3.5-turbo"
     val MODEL_TEXT_CURIE = "text-curie-001"
+    val MODEL_GPT_4 = "gpt-4"
 
 }

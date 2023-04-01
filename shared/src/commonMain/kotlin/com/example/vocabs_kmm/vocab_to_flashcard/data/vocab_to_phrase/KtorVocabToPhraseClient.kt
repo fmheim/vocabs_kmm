@@ -29,7 +29,7 @@ class KtorVocabToPhraseClient(private val openAiHttpClient: HttpClient) : VocabT
                 contentType(ContentType.Application.Json)
                 setBody(
                     ChatCompletionRequest(
-                        model = NetworkConstants.MODEL_GPT_3_5_TURBO, messages = arrayOf(
+                        model = NetworkConstants.MODEL_GPT_4, messages = arrayOf(
                             ChatMessage(
                                 role = "user",
                                 content = VocabToPhrasePromptProvider(
