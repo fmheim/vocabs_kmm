@@ -1,7 +1,8 @@
-package com.example.study.presentation
+package com.example.vocabs_kmm.study.presentation
 
-import com.example.study.domain.flashcard.GetRandomFlashcard
+import com.example.vocabs_kmm.study.domain.flashcard.GetRandomFlashcard
 import com.example.vocabs_kmm.core.domain.util.Resource
+import com.example.vocabs_kmm.study.domain.flashcard.FlashcardException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,22 +32,34 @@ class StudyViewModel(
 
             StudyEvent.ShowAnswer            -> _state.update { it.copy(isShowingAnswer = true) }
             StudyEvent.ShowNextCard          -> showNextCard()
+            StudyEvent.OnErrorSeen           -> _state.update { it.copy(error=null) }
+            StudyEvent.BackClick             -> Unit //handled in navigation
         }
     }
 
     private fun showNextCard() {
-        _state.update{it.copy(isLoadingFlashcard = true)}
-        val result =
-            getRandomFlashcard.execute(languageCode = state.value.selectedLanguage.language.langCode)
-        when (result) {
-            is Resource.Error -> _state.update { it.copy(error = ("todo study error"), isShowingAnswer = false, isLoadingFlashcard = false) }
-            is Resource.Success -> {
-                viewModelScope.launch{result.data?.collect{flashcard ->
-                _state.update { it.copy(currentFlashCard = flashcard, isLoadingFlashcard = false, isShowingAnswer = false) }}}
+        _state.update { it.copy(isLoadingFlashcard = true) }
+        viewModelScope.launch {
+            val result =
+                getRandomFlashcard.execute(languageCode = state.value.selectedLanguage.language.langCode)
+            when (result) {
+                is Resource.Error -> _state.update {
+                    it.copy(
+                        error = (result.throwable as? FlashcardException)?.error,
+                        isShowingAnswer = false,
+                        isLoadingFlashcard = false
+                    )
+                }
+                is Resource.Success -> {
+                    _state.update {
+                        it.copy(
+                            currentFlashCard = result.data,
+                            isLoadingFlashcard = false,
+                            isShowingAnswer = false
+                        )
+                    }
+                }
             }
         }
-
     }
-
-
 }
