@@ -54,6 +54,7 @@ dependencies {
     implementation(Deps.activityCompose)
     implementation(Deps.composeIconsExtended)
     implementation(Deps.composeNavigation)
+    implementation(Deps.coilCompose)
 
 
     implementation(Deps.hiltAndroid)
