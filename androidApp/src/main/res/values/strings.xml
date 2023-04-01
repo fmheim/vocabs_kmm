@@ -5,4 +5,9 @@
     <string name="study">study</string>
     <string name="show_answer">show answer</string>
     <string name="saved_success">saved successfully</string>
+    <string name="no_flashcards_saved_yet">No flashcards in %1$s saved yet.</string>
+    <string name="an_unknown_error_occurred_please_try_again">An unknown error occurred. Please try again.</string>
+    <string name="next_card">next card</string>
+    <string name="study_random_flash_card">Study random flash card</string>
+    <string name="back">back</string>
 </resources>
