@@ -11,7 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.study.presentation.StudyEvent
+import com.example.vocabs_kmm.study.presentation.StudyEvent
 import com.example.vocabs_kmm.android.study.presentation.AndroidStudyViewModel
 import com.example.vocabs_kmm.android.study.presentation.StudyScreen
 import com.example.vocabs_kmm.android.vocab_to_flashcard.presentation.AndroidVocabToFlashCardViewModel
@@ -55,7 +55,12 @@ fun VocabsAppNavigation(
                     )
                 )
             }
-            StudyScreen(state = state, onEvent = viewModel::onEvent)
+            StudyScreen(state = state, onEvent = { event ->
+                when (event) {
+                    is StudyEvent.BackClick -> navController.popBackStack()
+                    else                    -> viewModel.onEvent(event)
+                }
+            })
         }
     }
 }
