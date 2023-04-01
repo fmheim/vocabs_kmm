@@ -2,9 +2,9 @@ package com.example.vocabs_kmm.android.study.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.study.domain.flashcard.GetRandomFlashcard
-import com.example.study.presentation.StudyEvent
-import com.example.study.presentation.StudyViewModel
+import com.example.vocabs_kmm.study.domain.flashcard.GetRandomFlashcard
+import com.example.vocabs_kmm.study.presentation.StudyEvent
+import com.example.vocabs_kmm.study.presentation.StudyViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
