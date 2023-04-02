@@ -10,6 +10,7 @@ fun Flashcards.toFlashCard(): Flashcard {
         vocab = vocab,
         beforeVocabText = beforeVocabText,
         vocabInPhrase = vocabInPhrase,
-        afterVocabText = afterVocabText
+        afterVocabText = afterVocabText,
+        image = image
     )
 }

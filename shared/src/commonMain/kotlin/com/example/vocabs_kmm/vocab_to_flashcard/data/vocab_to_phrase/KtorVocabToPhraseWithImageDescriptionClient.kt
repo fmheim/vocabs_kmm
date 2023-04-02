@@ -4,10 +4,10 @@ import com.example.vocabs_kmm.vocab_to_flashcard.data.remote.NetworkConstants
 import com.example.vocabs_kmm.vocab_to_flashcard.data.vocab_to_phrase.dto.ChatCompletionRequest
 import com.example.vocabs_kmm.vocab_to_flashcard.data.vocab_to_phrase.dto.ChatCompletionResponse
 import com.example.vocabs_kmm.vocab_to_flashcard.data.vocab_to_phrase.dto.ChatMessage
-import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhraseClient
+import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhraseWithImageDescriptionClient
 import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhraseError
 import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhraseException
-import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhrasePromptProvider
+import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.ChatPromptProvider
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post
@@ -19,8 +19,8 @@ import io.ktor.http.contentType
 import io.ktor.utils.io.errors.IOException
 
 
-class KtorVocabToPhraseClient(private val openAiHttpClient: HttpClient) : VocabToPhraseClient {
-    override suspend fun requestToGeneratePhrase(
+class KtorVocabToPhraseWithImageDescriptionClient(private val openAiHttpClient: HttpClient) : VocabToPhraseWithImageDescriptionClient {
+    override suspend fun requestToGeneratePhraseWithImageDescription(
         language: String, vocab: String
     ): ChatCompletionResponse {
         val response = try {
@@ -29,10 +29,10 @@ class KtorVocabToPhraseClient(private val openAiHttpClient: HttpClient) : VocabT
                 contentType(ContentType.Application.Json)
                 setBody(
                     ChatCompletionRequest(
-                        model = NetworkConstants.MODEL_GPT_4, messages = arrayOf(
+                        model = NetworkConstants.MODEL_GPT_4, messages = listOf(
                             ChatMessage(
                                 role = "user",
-                                content = VocabToPhrasePromptProvider(
+                                content = ChatPromptProvider(
                                     language = language,
                                     vocab = vocab
                                 ).prompt

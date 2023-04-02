@@ -76,7 +76,7 @@ private fun SaveIconButton(onEvent: (VocabToFlashcardEvent) -> Unit, state: Voca
                 color = if(state.showSavedFlashcard) LightGreen else if (isSystemInDarkTheme()) Color.Transparent else MaterialTheme.colors.surface
             )
             .padding(7.dp),
-        enabled = state.phrase != null
+        enabled = !(state.phrase == null || state.isGeneratingImage)
     ) {
         AnimatedContent(
             targetState = state.showSavedFlashcard,
@@ -131,7 +131,7 @@ private fun ReDoIconButton(onEvent: (VocabToFlashcardEvent) -> Unit, state: Voca
     IconButton(
         onClick = { onEvent(VocabToFlashcardEvent.GeneratePhrase) }, modifier = Modifier
             .background(
-                color = if (state.phrase == null) MaterialTheme.colors.primary.copy(alpha = 0.5f) else MaterialTheme.colors.primary,
+                color = if (state.phrase == null || state.isGeneratingImage) MaterialTheme.colors.primary.copy(alpha = 0.5f) else MaterialTheme.colors.primary,
                 shape = CircleShape
             )
             .border(
@@ -140,13 +140,13 @@ private fun ReDoIconButton(onEvent: (VocabToFlashcardEvent) -> Unit, state: Voca
                 color = if (isSystemInDarkTheme()) Color.Transparent else MaterialTheme.colors.surface
             )
             .padding(7.dp),
-        enabled = state.phrase != null
+        enabled = !(state.phrase == null || state.isGeneratingImage)
     ) {
         Icon(
             imageVector = Icons.Default.Autorenew,
             contentDescription = stringResource(R.string.re_generate),
             modifier = Modifier.size(45.dp),
-            tint = if (state.phrase == null) MaterialTheme.colors.onPrimary.copy(alpha = 0.5f) else MaterialTheme.colors.onPrimary
+            tint = if (state.phrase == null || state.isGeneratingImage) MaterialTheme.colors.onPrimary.copy(alpha = 0.5f) else MaterialTheme.colors.onPrimary
         )
     }
 }

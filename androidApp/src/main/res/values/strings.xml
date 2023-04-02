@@ -10,4 +10,9 @@
     <string name="next_card">next card</string>
     <string name="study_random_flash_card">Study random flash card</string>
     <string name="back">back</string>
+    <string name="generated_image">generated image</string>
+    <string name="place_holder_image">place holder image</string>
+    <string name="generated_image_background">generated image background</string>
+    <string name="flashcard_image">flashcard image</string>
+    <string name="brush">brush</string>
 </resources>

@@ -44,7 +44,8 @@ class SqlDelightFlashCardDataSource(db: FlashcardDatabase) : FlashcardDataSource
             beforeVocabText = flashcard.beforeVocabText,
             vocabInPhrase = flashcard.vocabInPhrase,
             afterVocabText = flashcard.afterVocabText,
-            timestamp = Clock.System.now().toEpochMilliseconds()
+            timestamp = Clock.System.now().toEpochMilliseconds(),
+            image = flashcard.image
         )
     }
 

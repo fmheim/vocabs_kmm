@@ -18,6 +18,10 @@ object Deps {
     //Coil
     private const val coilVersion = "2.3.0"
     const val coilCompose = "io.coil-kt:coil-compose:$coilVersion"
+    //Blur effect on older android <12
+    private const val blurVersion = "0.1.2"
+    const val blurEffect = "com.github.skydoves:cloudy:$blurVersion"
+
 
     // KOTLIN DATE TIME
     private const val dateTimeVersion = "0.4.0"
