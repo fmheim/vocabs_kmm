@@ -4,6 +4,7 @@ object NetworkConstants {
     private const val BASE_URL = "https://api.openai.com/v1"
     val COMPLETIONS_URL = "$BASE_URL/completions"
     val CHAT_COMPLETION_URL = "$BASE_URL/chat/completions"
+    val IMAGE_GENERATION_URL = "$BASE_URL/images/generations"
 
     val MODELS_URL = "$BASE_URL/models"
 

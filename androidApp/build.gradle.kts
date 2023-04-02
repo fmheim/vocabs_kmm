@@ -55,6 +55,8 @@ dependencies {
     implementation(Deps.composeIconsExtended)
     implementation(Deps.composeNavigation)
     implementation(Deps.coilCompose)
+    implementation(Deps.blurEffect)
+
 
 
     implementation(Deps.hiltAndroid)

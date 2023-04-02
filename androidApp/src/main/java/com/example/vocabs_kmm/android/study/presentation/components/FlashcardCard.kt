@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.vocabs_kmm.android.core.presentation.components.AsyncImageBox
 import com.example.vocabs_kmm.android.core.presentation.theme.LightGreen
 import com.example.vocabs_kmm.android.core.presentation.theme.VocabsTheme
 import com.example.vocabs_kmm.core.domain.flashcard.Flashcard
@@ -28,7 +29,7 @@ fun FlashcardCard(
     state: StudyState
 ) {
     Card(
-        shape = RoundedCornerShape(37),
+        shape = RoundedCornerShape(23),
         backgroundColor = MaterialTheme.colors.surface,
         modifier = Modifier.padding(all = 24.dp)
 
@@ -36,11 +37,15 @@ fun FlashcardCard(
         Column(
             modifier = Modifier
                 .heightIn(min = 200.dp)
-                .padding(all = 16.dp),
+                ,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+
+            AsyncImageBox(image = flashcard.image, onSuccess = {})
+
             Text(
+                modifier = Modifier.padding(all = 16.dp),
                 text = buildAnnotatedString {
                     append(flashcard.beforeVocabText)
                     withStyle(
@@ -72,7 +77,8 @@ private fun FlashcardComponentPreview() {
                 vocab = "Hello",
                 beforeVocabText = "The word ",
                 afterVocabText = ", is a common greeting.",
-                vocabInPhrase = "hello"
+                vocabInPhrase = "hello",
+                image = byteArrayOf()
             ), state = StudyState(isShowingAnswer = false)
         )
     }

@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ChatCompletionRequest(
     val model: String,
-    val messages: Array<ChatMessage>,
+    val messages: List<ChatMessage>,
     @SerialName("max_tokens") val maxTokens: Int
 )
 

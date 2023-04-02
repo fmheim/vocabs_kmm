@@ -6,7 +6,8 @@ CREATE TABLE flashcards (
     beforeVocabText TEXT NOT NULL,
     vocabInPhrase TEXT NOT NULL,
     afterVocabText TEXT NOT NULL,
-    timestamp INTEGER NOT NULL
+    timestamp INTEGER NOT NULL,
+    image BLOB NOT NULL
 );
 
 -- Create an index on the languageCode column for faster querying
@@ -22,7 +23,8 @@ INTO flashcards (
     beforeVocabText,
     vocabInPhrase,
     afterVocabText,
-    timestamp
+    timestamp,
+    image
 ) VALUES (
     ?,
     ?,
@@ -30,6 +32,7 @@ INTO flashcards (
     ?,
     ?,
     ?,
+?,
     ?
 );
 

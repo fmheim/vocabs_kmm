@@ -26,7 +26,7 @@ fun ExamplePhraseComponent(
     onEvent: (VocabToFlashcardEvent) -> Unit,
     state: VocabToFlashcardState
 ) {
-    AnimatedContent(targetState = state.isGenerating, label = "") { isGenerating ->
+    AnimatedContent(targetState = state.isGeneratingText, label = "") { isGenerating ->
         Box(
             modifier = modifier
         ) {

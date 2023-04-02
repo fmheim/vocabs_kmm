@@ -4,8 +4,8 @@ import assertk.assertThat
 import com.example.vocabs_kmm.vocab_to_flashcard.data.vocab_to_phrase.dto.ChatChoice
 import com.example.vocabs_kmm.vocab_to_flashcard.data.vocab_to_phrase.dto.ChatCompletionResponse
 import com.example.vocabs_kmm.vocab_to_flashcard.data.vocab_to_phrase.dto.ChatMessage
-import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhrase
-import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhraseClient
+import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhraseWithImageDescription
+import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhraseWithImageDescriptionClient
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 import kotlin.test.assertTrue
@@ -13,18 +13,15 @@ import assertk.assertions.isEqualTo
 
 class CommonGreetingTest {
 
-    @Test
-    fun testExample() {
-        assertTrue(Greeting().greet().contains("Hello"), "Check 'Hello' is mentioned")
-    }
+
 }
 
 class CommonUseCaseTest {
 
     @Test
     fun `test that the vocab to phrase use case splits the phrase correctly`() = runBlocking {
-        val vocToPhraseMock = VocabToPhrase(object : VocabToPhraseClient {
-            override suspend fun requestToGeneratePhrase(
+        val vocToPhraseMock = VocabToPhraseWithImageDescription(object : VocabToPhraseWithImageDescriptionClient {
+            override suspend fun requestToGeneratePhraseWithImageDescription(
                 language: String,
                 vocab: String
             ): ChatCompletionResponse {
@@ -42,12 +39,12 @@ class CommonUseCaseTest {
         })
 
         val result = vocToPhraseMock.execute("English", "house")
-        assertThat(result.data?.beforeVocab).isEqualTo("The green ")
-        assertThat(result.data?.vocab).isEqualTo("house")
-        assertThat(result.data?.afterVocab).isEqualTo(" was beautiful")
+        assertThat(result.data?.examplePhrase?.beforeVocab).isEqualTo("The green ")
+        assertThat(result.data?.examplePhrase?.vocab).isEqualTo("house")
+        assertThat(result.data?.examplePhrase?.afterVocab).isEqualTo(" was beautiful")
 
-        val vocToPhraseMock2 = VocabToPhrase(object : VocabToPhraseClient {
-            override suspend fun requestToGeneratePhrase(
+        val vocToPhraseMock2 = VocabToPhraseWithImageDescription(object : VocabToPhraseWithImageDescriptionClient {
+            override suspend fun requestToGeneratePhraseWithImageDescription(
                 language: String,
                 vocab: String
             ): ChatCompletionResponse {
@@ -65,9 +62,9 @@ class CommonUseCaseTest {
         })
 
         val result2 = vocToPhraseMock2.execute("English", "The")
-        assertThat(result2.data?.beforeVocab).isEqualTo("The green house was ")
-        assertThat(result2.data?.vocab).isEqualTo("beautiful")
-        assertThat(result2.data?.afterVocab).isEqualTo("")
+        assertThat(result2.data?.examplePhrase?.beforeVocab).isEqualTo("The green house was ")
+        assertThat(result2.data?.examplePhrase?.vocab).isEqualTo("beautiful")
+        assertThat(result2.data?.examplePhrase?.afterVocab).isEqualTo("")
 
 
 

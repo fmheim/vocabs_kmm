@@ -2,8 +2,10 @@ package com.example.vocabs_kmm.android.vocab_to_flashcard.di
 
 import com.example.vocabs_kmm.core.domain.flashcard.FlashcardDataSource
 import com.example.vocabs_kmm.vocab_to_flashcard.domain.flashcard.SaveAsFlashcard
-import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhrase
-import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhraseClient
+import com.example.vocabs_kmm.vocab_to_flashcard.domain.image_generation.GenerateImage
+import com.example.vocabs_kmm.vocab_to_flashcard.domain.image_generation.ImageGenerationClient
+import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhraseWithImageDescription
+import com.example.vocabs_kmm.vocab_to_flashcard.domain.vocab_to_phrase.VocabToPhraseWithImageDescriptionClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,16 +18,24 @@ object VocabToFlashcardUseCaseModule {
     @Provides
     @ViewModelScoped
     fun provideVocabToPhraseUseCase(
-        client: VocabToPhraseClient
-    ): VocabToPhrase {
-        return VocabToPhrase(client = client)
+        client: VocabToPhraseWithImageDescriptionClient
+    ): VocabToPhraseWithImageDescription {
+        return VocabToPhraseWithImageDescription(client = client)
     }
 
     @Provides
     @ViewModelScoped
-    fun providerSaveAsFlashcardUseCase(
+    fun provideSaveAsFlashcardUseCase(
         dataSource: FlashcardDataSource
     ):SaveAsFlashcard{
         return SaveAsFlashcard(flashcardDataSource = dataSource)
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideGenerateImageUseCase(
+        client: ImageGenerationClient
+    ):GenerateImage{
+        return GenerateImage(client = client)
     }
 }
