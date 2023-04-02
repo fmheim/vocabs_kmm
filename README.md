@@ -1,6 +1,6 @@
 # vocabs_kmm
 
-I'm developing `vocabs_kmm` as a Kotlin Multiplatform Mobile (KMM) project that allows users to input a word in a selected language and generates an example sentence using the OpenAI API to explain the word in a common context. The app also features a study flashcards mode where the user sees the example sentence with the missing word and can test their vocabulary retention.
+I'm developing `vocabs_kmm` as a Kotlin Multiplatform Mobile (KMM) project that allows users to input a word in a selected language and generates an example sentence using the OpenAI API to explain the word in a common context. In addition, the OpenAI API is utilized by the app to generate an image with the aim of enhancing comprehension of the provided example sentence. The app also features a study flashcards mode where the user sees the example sentence with the missing word and can test their vocabulary retention.
 I integrated several techniques learned from this [KMM course by @philipplackner](https://pl-coding.com/building-industry-level-multiplatform-apps-with-kmm/) into my app. This includes for example sharing the view model, which is very useful.
 
 
@@ -9,15 +9,23 @@ I integrated several techniques learned from this [KMM course by @philipplackner
 I implemented the following features in the `vocabs_kmm` app:
 
 - **OpenAI API using Ktor:** I used the Ktor HTTP client to access the OpenAI API and generate example sentences.
+- **Image Generation:** The app is using the OpenAi Api to generate images that complement the example sentences to enhance the user's learning experience.
 - **MVI Architecture:** I followed the Model-View-Intent (MVI) architecture to separate concerns and make the codebase more manageable.
-- **Database with SQLDelight:** I used SQLDelight in the shared module to store data and provide offline access to the generated example sentences.
+- **Database with SQLDelight:** I used SQLDelight in the shared module to store data and provide offline access to the generated flashcards.
 - **Study Flashcards:** I added a study flashcards mode where the user can test their vocabulary retention by seeing the example sentence with the missing word.
 - **Jet Compose UI for Android:** I utilized Jet Compose, a modern toolkit for building native Android UI, to develop the user interface for the Android version of the app. The app has a dark mode and a light mode theme.
 
 ### Screen recording of current status
+Here you can see two screen recordings videos of some examples of example sentence + image generation and the "random flashcard" study mode.
 
 
-https://user-images.githubusercontent.com/100945009/227809998-2e98ca93-b1f5-4713-8a68-c05c29a99563.mp4
+
+https://user-images.githubusercontent.com/72472174/229364322-6aacca60-bbfe-477e-ab8d-8e10b54be14a.mp4
+
+
+
+https://user-images.githubusercontent.com/72472174/229364328-3b479a8e-f681-43a7-9ad3-276cb1e9dc74.mp4
+
 
 
 
@@ -25,8 +33,9 @@ https://user-images.githubusercontent.com/100945009/227809998-2e98ca93-b1f5-4713
 
 I plan to implement the following features in future updates of the `vocabs_kmm` app:
 
-- **Image Generation:** The app will use the OpenAi Api to generate images that complement the example sentences to enhance the user's learning experience. At the moment only a static place holder image is shown.
+
 - **iOS App** I plan to use SwiftUi to make the UI for the iOS app of the KMM project. As the viewmodel and all the business logic is implemented as a shared kotlin module, this will require only minimal swift code.
+- **Improved Study Mode** I think it would be cool to add more features to the existing study mode, such as gamification elements, and a spaced repetition algorithm, to make learning more engaging and effective.
 
 
 
