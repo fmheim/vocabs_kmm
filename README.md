@@ -14,6 +14,7 @@ I implemented the following features in the `vocabs_kmm` app:
 - **Database with SQLDelight:** I used SQLDelight in the shared module to store data and provide offline access to the generated flashcards.
 - **Study Flashcards:** I added a study flashcards mode where the user can test their vocabulary retention by seeing the example sentence with the missing word.
 - **Jet Compose UI for Android:** I utilized Jet Compose, a modern toolkit for building native Android UI, to develop the user interface for the Android version of the app. The app has a dark mode and a light mode theme.
+- **Dependency Injection with Hilt for Android:** On the Android side I chose Dagger Hilt for dependency injection to improve modularity and testability of the code. 
 
 ### Screen recording of current status
 Here you can see two screen recordings videos of some examples of example sentence + image generation and the "random flashcard" study mode.
