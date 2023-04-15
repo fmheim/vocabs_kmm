@@ -31,7 +31,7 @@ class SaveAsFlashcard(private val flashcardDataSource: FlashcardDataSource) {
             )
             flashcardDataSource.insertFlashcard(
                 flashcard = card
-            )
+            ) 
             return Resource.Success(data = card)
         } catch (e: FlashcardException) {
             e.printStackTrace()
