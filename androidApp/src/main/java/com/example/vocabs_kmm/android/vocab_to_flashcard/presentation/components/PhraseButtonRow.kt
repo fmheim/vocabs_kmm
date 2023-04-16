@@ -67,19 +67,19 @@ private fun SaveIconButton(onEvent: (VocabToFlashcardEvent) -> Unit, state: Voca
         onClick = { onEvent(VocabToFlashcardEvent.SaveFlashcard) },
         modifier = Modifier
             .background(
-                color = if (state.phrase == null) MaterialTheme.colors.primary.copy(alpha = 0.5f) else if (state.showSavedFlashcard) DarkPurple else MaterialTheme.colors.primary,
+                color = if (state.phrase == null) MaterialTheme.colors.primary.copy(alpha = 0.5f) else if (state.showThatHasSavedFlashcard) DarkPurple else MaterialTheme.colors.primary,
                 shape = CircleShape
             )
             .border(
                 shape = CircleShape,
                 width = 1.dp,
-                color = if(state.showSavedFlashcard) LightGreen else if (isSystemInDarkTheme()) Color.Transparent else MaterialTheme.colors.surface
+                color = if(state.showThatHasSavedFlashcard) LightGreen else if (isSystemInDarkTheme()) Color.Transparent else MaterialTheme.colors.surface
             )
             .padding(7.dp),
         enabled = !(state.phrase == null || state.isGeneratingImage)
     ) {
         AnimatedContent(
-            targetState = state.showSavedFlashcard,
+            targetState = state.showThatHasSavedFlashcard,
             label = "saved animation"
         ) { showSaved ->
             if (showSaved) {

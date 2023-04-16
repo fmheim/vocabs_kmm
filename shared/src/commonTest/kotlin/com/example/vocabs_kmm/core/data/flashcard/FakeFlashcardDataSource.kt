@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.map
 class FakeFlashcardDataSource : FlashcardDataSource {
 
     private val _flashcards = MutableStateFlow(listOf<Flashcard>())
+    var lastInsertedFlashcard: Flashcard? = null
 
     override fun getAllFlashcards(): CommonFlow<List<Flashcard>> {
         return _flashcards.toCommonFlow()
@@ -29,5 +30,6 @@ class FakeFlashcardDataSource : FlashcardDataSource {
 
     override suspend fun insertFlashcard(flashcard: Flashcard) {
         _flashcards.value += flashcard
+        lastInsertedFlashcard = flashcard
     }
 }

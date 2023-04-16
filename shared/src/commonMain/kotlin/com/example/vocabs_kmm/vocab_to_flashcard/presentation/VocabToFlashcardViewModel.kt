@@ -82,12 +82,12 @@ class VocabToFlashcardViewModel(
                 is Resource.Error   -> _state.update { it.copy(error = result.throwable as? FlashcardException) }
                 is Resource.Success -> _state.update {
                     it.copy(
-                        lastSavedFlashCard = result.data, showSavedFlashcard = true
+                        lastSavedFlashCard = result.data, showThatHasSavedFlashcard = true
                     )
                 }
             }
             delay(1200)
-            _state.update { it.copy(showSavedFlashcard = false) }
+            _state.update { it.copy(showThatHasSavedFlashcard = false) }
         }
     }
 

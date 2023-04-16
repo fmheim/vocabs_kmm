@@ -14,7 +14,7 @@ data class VocabToFlashcardState(
     val imageDescription: String? = null,
     val isChoosingLanguage: Boolean = false,
     val lastSavedFlashCard: Flashcard? = null,
-    val showSavedFlashcard: Boolean = false,
+    val showThatHasSavedFlashcard: Boolean = false,
     val imageUrl: String? = null,
     val image: ByteArray? = null,
     val error: Exception? = null
@@ -36,7 +36,7 @@ data class VocabToFlashcardState(
         if (imageDescription != other.imageDescription) return false
         if (isChoosingLanguage != other.isChoosingLanguage) return false
         if (lastSavedFlashCard != other.lastSavedFlashCard) return false
-        if (showSavedFlashcard != other.showSavedFlashcard) return false
+        if (showThatHasSavedFlashcard != other.showThatHasSavedFlashcard) return false
         if (imageUrl != other.imageUrl) return false
         if (image != null) {
             if (other.image == null) return false
@@ -57,7 +57,7 @@ data class VocabToFlashcardState(
         result = 31 * result + (imageDescription?.hashCode() ?: 0)
         result = 31 * result + isChoosingLanguage.hashCode()
         result = 31 * result + (lastSavedFlashCard?.hashCode() ?: 0)
-        result = 31 * result + showSavedFlashcard.hashCode()
+        result = 31 * result + showThatHasSavedFlashcard.hashCode()
         result = 31 * result + (imageUrl?.hashCode() ?: 0)
         result = 31 * result + (image?.contentHashCode() ?: 0)
         result = 31 * result + (error?.hashCode() ?: 0)
