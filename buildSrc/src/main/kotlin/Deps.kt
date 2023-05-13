@@ -2,9 +2,9 @@ object Deps {
     // COMPOSE
     private const val activityComposeVersion = "1.6.1"
     const val activityCompose = "androidx.activity:activity-compose:$activityComposeVersion"
-    const val kotlinCompilerExtensionVersion = "1.4.3"
+    const val kotlinCompilerExtensionVersion = "1.4.7"
 
-    const val composeVersion = "1.4.0-rc01"
+    const val composeVersion = "1.4.3"
     const val composeUi = "androidx.compose.ui:ui:$composeVersion"
     const val composeUiTooling = "androidx.compose.ui:ui-tooling:$composeVersion"
     const val composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$composeVersion"
@@ -45,13 +45,13 @@ object Deps {
     const val ktorLogging = "io.ktor:ktor-client-logging:$ktorVersion"
     const val ktorAuth = "io.ktor:ktor-client-auth:$ktorVersion"
     private const val logbackVersion = "1.2.11"
-    const val ktorLogginFramework = "ch.qos.logback:logback-classic:$logbackVersion"
+    const val ktorLoggingFramework = "ch.qos.logback:logback-classic:$logbackVersion"
 
     // GRADLE PLUGINS
-    const val kotlinVersion = "1.8.10"
+    const val kotlinVersion = "1.8.21"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
-    private const val gradleVersion = "7.4.2"
+    private const val gradleVersion = "7.4.0"
     const val androidBuildTools = "com.android.tools.build:gradle:$gradleVersion"
 
     private const val sqlDelightGradleVersion = "1.5.5"
