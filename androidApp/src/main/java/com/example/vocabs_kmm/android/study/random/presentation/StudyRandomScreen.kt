@@ -1,4 +1,4 @@
-package com.example.vocabs_kmm.android.study.presentation
+package com.example.vocabs_kmm.android.study.random.presentation
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -32,18 +32,18 @@ import coil.compose.AsyncImage
 import com.example.vocabs_kmm.android.R
 import com.example.vocabs_kmm.android.core.presentation.theme.VocabsTheme
 import com.example.vocabs_kmm.android.core.presentation.widgets.LanguageDropDown
-import com.example.vocabs_kmm.android.study.presentation.components.FlashcardCard
-import com.example.vocabs_kmm.android.study.presentation.components.NextCardIconButton
-import com.example.vocabs_kmm.android.study.presentation.components.ShowAnswerIconButton
-import com.example.vocabs_kmm.android.study.presentation.components.StudyRandomButton
-import com.example.vocabs_kmm.study.domain.flashcard.FlashcardError
-import com.example.vocabs_kmm.study.presentation.StudyEvent
-import com.example.vocabs_kmm.study.presentation.StudyState
+import com.example.vocabs_kmm.android.study.random.presentation.components.FlashcardCard
+import com.example.vocabs_kmm.android.study.random.presentation.components.NextCardIconButton
+import com.example.vocabs_kmm.android.study.random.presentation.components.ShowAnswerIconButton
+import com.example.vocabs_kmm.android.study.random.presentation.components.StudyRandomButton
+import com.example.vocabs_kmm.study.random.domain.flashcard.FlashcardError
+import com.example.vocabs_kmm.study.random.presentation.StudyRandomEvent
+import com.example.vocabs_kmm.study.random.presentation.StudyRandomState
 
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun StudyScreen(state: StudyState, onEvent: (StudyEvent) -> Unit) {
+fun StudyScreen(state: StudyRandomState, onEvent: (StudyRandomEvent) -> Unit) {
 
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     Scaffold(scaffoldState = scaffoldState,
@@ -53,7 +53,7 @@ fun StudyScreen(state: StudyState, onEvent: (StudyEvent) -> Unit) {
                 Modifier
                     .fillMaxWidth(0.5f)
                     .padding(all = 16.dp)
-                    .clickable { onEvent(StudyEvent.BackClick) }) {
+                    .clickable { onEvent(StudyRandomEvent.BackClick) }) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = stringResource(R.string.back),
@@ -63,8 +63,8 @@ fun StudyScreen(state: StudyState, onEvent: (StudyEvent) -> Unit) {
         },
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                if (state.isChoosingLanguage) onEvent(StudyEvent.CloseLanguageDropDown) else onEvent(
-                    StudyEvent.OpenLanguageDropDown
+                if (state.isChoosingLanguage) onEvent(StudyRandomEvent.CloseLanguageDropDown) else onEvent(
+                    StudyRandomEvent.OpenLanguageDropDown
                 )
             }, backgroundColor = MaterialTheme.colors.primary) {
 
@@ -89,7 +89,7 @@ fun StudyScreen(state: StudyState, onEvent: (StudyEvent) -> Unit) {
                         FlashcardError.UNKNOWN_ERROR      -> context.getString(R.string.an_unknown_error_occurred_please_try_again)
                     }
                 )
-                onEvent(StudyEvent.OnErrorSeen)
+                onEvent(StudyRandomEvent.OnErrorSeen)
 
             }
 
@@ -109,7 +109,7 @@ fun StudyScreen(state: StudyState, onEvent: (StudyEvent) -> Unit) {
                 ) {
                     if (flashcard != null) {
 
-                        FlashcardCard(flashcard, state)
+                        FlashcardCard(modifier = Modifier.padding(all = 24.dp), flashcard = flashcard, isShowingAnswer =  state.isShowingAnswer)
                         Spacer(modifier = Modifier.height(16.dp))
                         if (state.isShowingAnswer) NextCardIconButton(onEvent)
                         else ShowAnswerIconButton(onEvent)
@@ -127,8 +127,8 @@ fun StudyScreen(state: StudyState, onEvent: (StudyEvent) -> Unit) {
 
         LanguageDropDown(
             isExpanded = state.isChoosingLanguage,
-            onLanguageSelected = { language -> onEvent(StudyEvent.SelectLanguage(language) )},
-            close = {onEvent(StudyEvent.CloseLanguageDropDown)})
+            onLanguageSelected = { language -> onEvent(StudyRandomEvent.SelectLanguage(language) )},
+            close = {onEvent(StudyRandomEvent.CloseLanguageDropDown)})
     }
 }
 
@@ -139,6 +139,6 @@ fun StudyScreen(state: StudyState, onEvent: (StudyEvent) -> Unit) {
 @Composable
 fun StudyScreenPreview() {
     VocabsTheme(darkTheme = true) {
-        StudyScreen(state = StudyState(), onEvent = {})
+        StudyScreen(state = StudyRandomState(), onEvent = {})
     }
 }

@@ -1,4 +1,4 @@
-package com.example.vocabs_kmm.android.study.presentation.components
+package com.example.vocabs_kmm.android.study.random.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -10,21 +10,21 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.vocabs_kmm.study.presentation.StudyEvent
+import com.example.vocabs_kmm.study.random.presentation.StudyRandomEvent
 import com.example.vocabs_kmm.android.R
 import com.example.vocabs_kmm.android.core.presentation.theme.VocabsTheme
 
 @Composable
-fun NextCardIconButton(onEvent: (StudyEvent) -> Unit) {
+fun ShowAnswerIconButton(onEvent: (StudyRandomEvent) -> Unit) {
     IconButton(
-        onClick = { onEvent(StudyEvent.ShowNextCard) },
+        onClick = { onEvent(StudyRandomEvent.ShowAnswer) },
         modifier = Modifier
             .background(
                 color = MaterialTheme.colors.primary, shape = CircleShape
@@ -37,18 +37,21 @@ fun NextCardIconButton(onEvent: (StudyEvent) -> Unit) {
             .padding(7.dp),
     ) {
         Icon(
-            imageVector = Icons.Default.ArrowForward,
-            contentDescription = stringResource(R.string.next_card),
-            modifier = Modifier.size(45.dp),
-            tint = MaterialTheme.colors.onPrimary
+            imageVector = Icons.Default.Visibility,
+            contentDescription = stringResource(
+                R.string.show_answer
+            ),
+            tint = MaterialTheme.colors.onPrimary,
+            modifier = Modifier.size(45.dp)
         )
+
     }
 }
 
 @Preview
 @Composable
-fun NextCardIconButtonPreview(){
+fun ShowAnswerIconButtonPreview(){
     VocabsTheme {
-        NextCardIconButton(onEvent = {})
+        ShowAnswerIconButton(onEvent = {})
     }
 }

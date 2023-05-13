@@ -1,4 +1,4 @@
-package com.example.vocabs_kmm.study.domain.flashcard
+package com.example.vocabs_kmm.study.random.domain.flashcard
 
 
 enum class FlashcardError {

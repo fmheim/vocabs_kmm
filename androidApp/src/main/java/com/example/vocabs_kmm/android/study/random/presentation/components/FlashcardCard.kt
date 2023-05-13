@@ -1,5 +1,6 @@
-package com.example.vocabs_kmm.android.study.presentation.components
+package com.example.vocabs_kmm.android.study.random.presentation.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.heightIn
@@ -21,23 +22,23 @@ import com.example.vocabs_kmm.android.core.presentation.components.AsyncImageBox
 import com.example.vocabs_kmm.android.core.presentation.theme.LightGreen
 import com.example.vocabs_kmm.android.core.presentation.theme.VocabsTheme
 import com.example.vocabs_kmm.core.domain.flashcard.Flashcard
-import com.example.vocabs_kmm.study.presentation.StudyState
+import com.example.vocabs_kmm.study.random.presentation.StudyRandomState
 
 @Composable
 fun FlashcardCard(
     flashcard: Flashcard,
-    state: StudyState
+    isShowingAnswer: Boolean,
+    modifier: Modifier = Modifier
 ) {
     Card(
         shape = RoundedCornerShape(23),
         backgroundColor = MaterialTheme.colors.surface,
-        modifier = Modifier.padding(all = 24.dp)
-
+        modifier = modifier,
+        border = BorderStroke(width = 3.dp, color = MaterialTheme.colors.surface)
     ) {
         Column(
             modifier = Modifier
-                .heightIn(min = 200.dp)
-                ,
+                .heightIn(min = 200.dp, max = 450.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -53,7 +54,7 @@ fun FlashcardCard(
                             fontWeight = FontWeight.Bold, color = LightGreen
                         )
                     ) {
-                        if (state.isShowingAnswer) append(flashcard.vocabInPhrase) else append(
+                        if (isShowingAnswer) append(flashcard.vocabInPhrase) else append(
                             "[...]"
                         )
                     }
@@ -79,7 +80,7 @@ private fun FlashcardComponentPreview() {
                 afterVocabText = ", is a common greeting.",
                 vocabInPhrase = "hello",
                 image = byteArrayOf()
-            ), state = StudyState(isShowingAnswer = false)
+            ), isShowingAnswer = false
         )
     }
 }

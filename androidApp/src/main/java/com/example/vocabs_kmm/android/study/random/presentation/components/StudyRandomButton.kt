@@ -1,4 +1,4 @@
-package com.example.vocabs_kmm.android.study.presentation.components
+package com.example.vocabs_kmm.android.study.random.presentation.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.shape.CircleShape
@@ -10,14 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.vocabs_kmm.study.presentation.StudyEvent
+import com.example.vocabs_kmm.study.random.presentation.StudyRandomEvent
 import com.example.vocabs_kmm.android.R
 import com.example.vocabs_kmm.android.core.presentation.theme.VocabsTheme
 
 @Composable
-fun StudyRandomButton(onEvent: (StudyEvent) -> Unit) {
+fun StudyRandomButton(onEvent: (StudyRandomEvent) -> Unit) {
     OutlinedButton(
-        onClick = { onEvent(StudyEvent.ShowNextCard) },
+        onClick = { onEvent(StudyRandomEvent.ShowNextCard) },
         shape = CircleShape,
         colors = ButtonDefaults.outlinedButtonColors(
             backgroundColor = MaterialTheme.colors.background,
