@@ -17,6 +17,3 @@ class GenerateImage(private val client: ImageGenerationClient) {
         }
     }
 }
-
-//todo: viewmodel: execute the use case as soon as we get the prompt or alternatively put the prompt into the state and collect the state, then when prompt generation finish fire onEvent(generateImage)
-//todo: make di module with this use case
