@@ -20,7 +20,6 @@ actual class OpenAiHttpClientFactory {
                 level = LogLevel.ALL
             }
             install(ContentNegotiation) {
-
                 json(Json{ignoreUnknownKeys})
             }
             install(Auth) {

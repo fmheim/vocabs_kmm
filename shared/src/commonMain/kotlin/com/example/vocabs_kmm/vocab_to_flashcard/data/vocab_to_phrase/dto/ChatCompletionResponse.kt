@@ -10,14 +10,14 @@ data class ChatCompletionResponse(
     @SerialName("created") val creationDate: Long? = null,
     val model: String? = null,
     val usage: Usage? = null,
-    val choices: Array<ChatChoice>? = null
-
-
+    val choices: Array<ChatChoice>? = null,
+    @SerialName("system_fingerprint") val fingerprint: String? = null
 )
 
 @Serializable
 data class ChatChoice(
     val message: ChatMessage,
     val index: Int,
-    @SerialName("finish_reason") val finishReason: String
+    @SerialName("finish_reason") val finishReason: String,
+    val logprobs: String? = null,
 )

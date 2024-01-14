@@ -8,21 +8,22 @@ plugins {
 
 android {
     namespace = "com.example.vocabs_kmm.android"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         applicationId = "com.example.vocabs_kmm.android"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = Deps.kotlinCompilerExtensionVersion
     }
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
             excludes += "META-INF/INDEX.LIST"

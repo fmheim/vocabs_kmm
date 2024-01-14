@@ -1,10 +1,10 @@
 object Deps {
     // COMPOSE
-    private const val activityComposeVersion = "1.6.1"
+    private const val activityComposeVersion = "1.8.2"
     const val activityCompose = "androidx.activity:activity-compose:$activityComposeVersion"
-    const val kotlinCompilerExtensionVersion = "1.4.3"
+    const val kotlinCompilerExtensionVersion = "1.5.8"
 
-    const val composeVersion = "1.4.0-rc01"
+    const val composeVersion = "1.5.4"
     const val composeUi = "androidx.compose.ui:ui:$composeVersion"
     const val composeUiTooling = "androidx.compose.ui:ui-tooling:$composeVersion"
     const val composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$composeVersion"
@@ -12,11 +12,11 @@ object Deps {
     const val composeMaterial = "androidx.compose.material:material:$composeVersion"
     const val composeIconsExtended = "androidx.compose.material:material-icons-extended:$composeVersion"
 
-    private const val composeNavigationVersion = "2.5.3"
+    private const val composeNavigationVersion = "2.7.6"
     const val composeNavigation = "androidx.navigation:navigation-compose:$composeNavigationVersion"
 
     //Coil
-    private const val coilVersion = "2.3.0"
+    private const val coilVersion = "2.5.0"
     const val coilCompose = "io.coil-kt:coil-compose:$coilVersion"
     //Blur effect on older android <12
     private const val blurVersion = "0.1.2"
@@ -28,8 +28,8 @@ object Deps {
     const val kotlinDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion"
 
     // HILT
-    private const val hiltVersion = "2.45"
-    private const val hiltCompilerVersion = "1.0.0"
+    private const val hiltVersion = "2.50"
+    private const val hiltCompilerVersion = "1.1.0"
     const val hiltAndroid = "com.google.dagger:hilt-android:$hiltVersion"
     const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
     const val hiltCompiler = "androidx.hilt:hilt-compiler:$hiltCompilerVersion"
@@ -48,10 +48,10 @@ object Deps {
     const val ktorLogginFramework = "ch.qos.logback:logback-classic:$logbackVersion"
 
     // GRADLE PLUGINS
-    const val kotlinVersion = "1.8.10"
+    const val kotlinVersion = "1.9.22"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
-    private const val gradleVersion = "7.4.2"
+    private const val gradleVersion = "8.2.1"
     const val androidBuildTools = "com.android.tools.build:gradle:$gradleVersion"
 
     private const val sqlDelightGradleVersion = "1.5.5"

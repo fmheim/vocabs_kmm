@@ -125,7 +125,7 @@ fun VocabToFlashcardScreen(state: VocabToFlashcardState, onEvent: (VocabToFlashc
 @Preview(showBackground = true)
 @Composable
 fun VocabToFlashcardScreenPreview() {
-    VocabsTheme(darkTheme = false) {
+    VocabsTheme(darkTheme = true) {
         VocabToFlashcardScreen(state = VocabToFlashcardState(
             phrase = ExamplePhrase(
                 beforeVocab = "This is an ",

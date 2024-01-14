@@ -7,7 +7,7 @@ plugins {
 }
 
 kotlin {
-    android {
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
@@ -91,12 +91,15 @@ kotlin {
 
 android {
     namespace = "com.example.vocabs_kmm"
-    compileSdk = 33
+    compileSdk = 34
+    buildFeatures {
+        buildConfig = true
+    }
     defaultConfig {
         minSdk = 24
         buildConfigField("String", "OPEN_AI_KEY", "\"${System.getenv("OPENAI_API_KEY")}\"")
     }
-    packagingOptions {
+    packaging {
         resources.excludes.add("META-INF/*")
     }
 }
